@@ -19,11 +19,11 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by Henry.Oforeh on 2016/07/22.
  */
-public class DownloadTask extends AsyncTask<Object, Void, ArrayList<Person>>
+public class DownloadPerson extends AsyncTask<Object, Void, ArrayList<Person>>
 {
     Context context;
 
-    public DownloadTask(Context context)
+    public DownloadPerson(Context context)
     {
         this.context = context;
     }
@@ -33,11 +33,11 @@ public class DownloadTask extends AsyncTask<Object, Void, ArrayList<Person>>
     {
         synchronized (this)
         {
-            return DownloadPersons();
+            return DownloadPersonsData();
         }
     }
 
-    private ArrayList<Person> DownloadPersons()
+    private ArrayList<Person> DownloadPersonsData()
     {
         Gson gson = new GsonBuilder()
                 .create();

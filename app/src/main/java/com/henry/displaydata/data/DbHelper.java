@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.henry.displaydata.model.Person;
 import com.henry.displaydata.utility.Utility;
 
 import java.util.ArrayList;
@@ -46,37 +47,22 @@ public class DbHelper extends SQLiteOpenHelper
         onCreate(sqLiteDatabase);
     }
 
-    public void SaveRecord(HashMap<Integer, String> queryValues,String TableName, boolean shouldClear)
+    public void SaveRecord(ArrayList<Person> personList)
     {
-        if(shouldClear)
-            ClearTable(TableName);
-
-        try{
-            SQLiteDatabase database = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            String columnName = "";String valueData="";
-            String[] SepData = {"",""};
-            String[] ColumnValues = {"",""};
-            for (Map.Entry<Integer,String> entry : queryValues.entrySet())
-            {
-                //split the rawdata that comes from the concatenated values of the web service
-                SepData = Utility.split(entry.getValue(), "@@", 0);
-
-                //split the sepdata to get individual columns and their respective values
-                for(int x = 0; x < SepData.length; x++)
-                {
-                    ColumnValues = Utility.split(SepData[x].trim(), "#", 0);
-                    columnName = ColumnValues[0];
-                    valueData = ColumnValues[1];
-                    values.put(columnName, valueData);
-                }
-                database.insert(TableName, null, values);
-            }
-            database.close();
-        }catch(Exception ex){
+        SQLiteDatabase database = this.getWritableDatabase();
+        for(Person person: personList)
+        {
+            database.execSQL("INSERT INTO " +
+                    DataContract.PersonTable.TABLE_NAME +
+                    " (" + DataContract.PersonTable.COLUMN_NAME_ID +
+                    "," + DataContract.PersonTable.COLUMN_NAME_FIRST_NAME +
+                    "," + DataContract.PersonTable.COLUMN_NAME_LAST_NAME + ") " +
+                    " Values (" +
+                    person.getId() + "," +
+                    "'" + person.getFirstName() + "'," +
+                    "'" + person.getLastName() + "');");
         }
     }
-
 
     public void ClearTable(String TableName)
     {
