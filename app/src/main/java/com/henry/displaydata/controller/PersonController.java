@@ -20,7 +20,7 @@ public class PersonController extends Application
         this.context = context;
       }
 
-      public void AddNewPerson(ArrayList<Person> personList)
+    public void AddNewPersons(ArrayList<Person> personList)
       {
           try{
               DbHelper dbHelper = new DbHelper(context);
