@@ -29,7 +29,7 @@ public class SQLDDL
     {
         SQLHelper sqlHelper = new SQLiteHelper();
         List<SQLColumn> columns = new ArrayList<>();
-        columns.add(new SQLColumn(DataContract.PersonTable.COLUMN_NAME_ID, sqlHelper.getSQLTypeString()));
+        columns.add(new SQLColumn(DataContract.PersonTable.COLUMN_NAME_ID, sqlHelper.getSQLTypeInteger()));
         columns.add(new SQLColumn(DataContract.PersonTable.COLUMN_NAME_FIRST_NAME, sqlHelper.getSQLTypeString()));
         columns.add(new SQLColumn(DataContract.PersonTable.COLUMN_NAME_LAST_NAME, sqlHelper.getSQLTypeString()));
         return sqlHelper.getTableCreateDDL(DataContract.PersonTable.TABLE_NAME, columns);

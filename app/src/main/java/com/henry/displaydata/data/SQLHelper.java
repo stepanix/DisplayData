@@ -13,5 +13,7 @@ public interface SQLHelper
 
     public String getSQLTypeString();
 
+    public String getSQLTypeInteger();
+
     public String getSQLTypeText();
 }

@@ -58,8 +58,15 @@ public final class SQLiteHelper implements SQLHelper {
     }
 
     @Override
+    public String getSQLTypeInteger() {
+        return "INTEGER";
+    }
+
+    @Override
     public String getSQLTypeText() {
         return "TEXT";
     }
+
+
 
 }
