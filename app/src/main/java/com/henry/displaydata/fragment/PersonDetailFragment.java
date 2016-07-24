@@ -34,7 +34,6 @@ public class PersonDetailFragment extends Fragment
         super.onCreate(savedInstanceState);
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-
     }
 
     @Override
@@ -51,7 +50,6 @@ public class PersonDetailFragment extends Fragment
         txtAgeValue =(TextView) rootView.findViewById(R.id.txtAgeValue);
         txtLastNameValue =(TextView) rootView.findViewById(R.id.txtLastNameValue);
         txtFirstNameValue =(TextView) rootView.findViewById(R.id.txtFirstNameValue);
-
 
         txtColorValue.setText(color);
         txtAgeValue.setText(String.valueOf(age));
