@@ -18,4 +18,13 @@ public class DataContract
         public static final String COLUMN_NAME_FIRST_NAME = "firstname";
         public static final String COLUMN_NAME_LAST_NAME = "lastname";
     }
+
+    public static abstract class PersonDetailTable implements BaseColumns
+    {
+        public static final String TABLE_NAME = "PersonDetail";
+        public static final String COLUMN_NAME_ID = "id";
+        public static final String COLUMN_NAME_PERSON_ID = "person_id";
+        public static final String COLUMN_NAME_AGE = "age";
+        public static final String COLUMN_NAME_COLOR = "favouritecolor";
+    }
 }

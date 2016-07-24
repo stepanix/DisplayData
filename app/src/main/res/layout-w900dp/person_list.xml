@@ -14,20 +14,15 @@
     <!--
     This layout is a two-pane layout for the Persons
     master/detail flow.
-    
     -->
-
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.RecyclerView
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="53dp"
         android:id="@+id/person_list"
-        android:name="com.henry.displaydata.PersonListFragment"
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.henry.displaydata.activity.PersonListActivity"
-        tools:listitem="@layout/person_list_content" />
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
 
     <FrameLayout
         android:id="@+id/person_detail_container"

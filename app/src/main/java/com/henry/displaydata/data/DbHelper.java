@@ -32,7 +32,7 @@ public class DbHelper extends SQLiteOpenHelper
     {
         for (String stmt : SQLDDL.getSQLTableCreateStatements())
         {
-            sqLiteDatabase.execSQL(stmt);
+           sqLiteDatabase.execSQL(stmt);
         }
     }
 
@@ -42,26 +42,22 @@ public class DbHelper extends SQLiteOpenHelper
         // drop everything and recreate
         for (String stmt : SQLDDL.getSQLTableDropStatements())
         {
-            sqLiteDatabase.execSQL(stmt);
+           sqLiteDatabase.execSQL(stmt);
         }
         onCreate(sqLiteDatabase);
     }
 
-    public void SaveRecord(ArrayList<Person> personList)
+    public void SaveRecord(String sqlQuery)
     {
-        SQLiteDatabase database = this.getWritableDatabase();
-        for(Person person: personList)
-        {
-            database.execSQL("INSERT INTO " +
-                    DataContract.PersonTable.TABLE_NAME +
-                    " (" + DataContract.PersonTable.COLUMN_NAME_ID +
-                    "," + DataContract.PersonTable.COLUMN_NAME_FIRST_NAME +
-                    "," + DataContract.PersonTable.COLUMN_NAME_LAST_NAME + ") " +
-                    " Values (" +
-                    person.getId() + "," +
-                    "'" + person.getFirstName() + "'," +
-                    "'" + person.getLastName() + "');");
-        }
+       SQLiteDatabase database = this.getWritableDatabase();
+       database.execSQL(sqlQuery);
+    }
+
+    public Cursor GetRecords(String sqlQuery)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+        return cursor;
     }
 
     public void ClearTable(String TableName)

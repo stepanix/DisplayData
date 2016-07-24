@@ -15,6 +15,7 @@ public class SQLDDL
         SQLHelper sqlHelper = new SQLiteHelper();
         List<String> statements = new ArrayList<>();
         statements.add(sqlHelper.getTableDropDDL(DataContract.PersonTable.TABLE_NAME));
+        statements.add(sqlHelper.getTableDropDDL(DataContract.PersonDetailTable.TABLE_NAME));
         return statements;
     }
 
@@ -22,6 +23,7 @@ public class SQLDDL
     {
         List<String> statements = new ArrayList<>();
         statements.add(getCreatePersonTableDDL());
+        statements.add(getCreatePersonDetailTableDDL());
         return statements;
     }
 
@@ -34,4 +36,16 @@ public class SQLDDL
         columns.add(new SQLColumn(DataContract.PersonTable.COLUMN_NAME_LAST_NAME, sqlHelper.getSQLTypeString()));
         return sqlHelper.getTableCreateDDL(DataContract.PersonTable.TABLE_NAME, columns);
     }
+
+    private static String getCreatePersonDetailTableDDL()
+    {
+        SQLHelper sqlHelper = new SQLiteHelper();
+        List<SQLColumn> columns = new ArrayList<>();
+        columns.add(new SQLColumn(DataContract.PersonDetailTable.COLUMN_NAME_ID, sqlHelper.getSQLTypeInteger()));
+        columns.add(new SQLColumn(DataContract.PersonDetailTable.COLUMN_NAME_PERSON_ID, sqlHelper.getSQLTypeInteger(),true));
+        columns.add(new SQLColumn(DataContract.PersonDetailTable.COLUMN_NAME_AGE, sqlHelper.getSQLTypeInteger()));
+        columns.add(new SQLColumn(DataContract.PersonDetailTable.COLUMN_NAME_COLOR, sqlHelper.getSQLTypeString()));
+        return sqlHelper.getTableCreateDDL(DataContract.PersonDetailTable.TABLE_NAME, columns);
+    }
+
 }

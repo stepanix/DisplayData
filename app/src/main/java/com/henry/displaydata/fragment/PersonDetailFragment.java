@@ -1,6 +1,7 @@
 package com.henry.displaydata.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,62 +11,52 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.henry.displaydata.R;
-import com.henry.displaydata.activity.PersonDetailActivity;
-import com.henry.displaydata.activity.PersonListActivity;
-import com.henry.displaydata.dummy.DummyContent;
 
-/**
- * A fragment representing a single Person detail screen.
- * This fragment is either contained in a {@link PersonListActivity}
- * in two-pane mode (on tablets) or a {@link PersonDetailActivity}
- * on handsets.
- */
-public class PersonDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
-    public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private DummyContent.DummyItem mItem;
+public class PersonDetailFragment extends Fragment
+{
+    public static String FAV_COLOR = "color";
+    public static String AGE = "age";
+    public static String FIRST_NAME = "firstname";
+    public static String LAST_NAME = "lastname";
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public PersonDetailFragment() {
+    TextView txtColorValue,txtAgeValue,txtLastNameValue,txtFirstNameValue;
+    int age;
+    String color,firstName,lastName;
+
+    public PersonDetailFragment()
+    {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        Activity activity = this.getActivity();
+        CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
-            }
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.person_detail, container, false);
+                             Bundle savedInstanceState)
+    {
+        color = getArguments().getString(FAV_COLOR);
+        age = getArguments().getInt(AGE);
+        firstName = getArguments().getString(FIRST_NAME);
+        lastName = getArguments().getString(LAST_NAME);
 
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.person_detail)).setText(mItem.details);
-        }
+        View rootView = inflater.inflate(R.layout.person_detail, container, false);
+        txtColorValue =(TextView) rootView.findViewById(R.id.txtColorValue);
+        txtAgeValue =(TextView) rootView.findViewById(R.id.txtAgeValue);
+        txtLastNameValue =(TextView) rootView.findViewById(R.id.txtLastNameValue);
+        txtFirstNameValue =(TextView) rootView.findViewById(R.id.txtFirstNameValue);
+
+
+        txtColorValue.setText(color);
+        txtAgeValue.setText(String.valueOf(age));
+        txtLastNameValue.setText(lastName);
+        txtFirstNameValue.setText(firstName);
 
         return rootView;
     }
