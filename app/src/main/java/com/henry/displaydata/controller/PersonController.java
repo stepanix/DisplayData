@@ -6,26 +6,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.henry.displaydata.app.AppConfig;
+
 import com.henry.displaydata.data.DataContract;
 import com.henry.displaydata.data.DbHelper;
 import com.henry.displaydata.listener.OnDownloadTaskCompleted;
 import com.henry.displaydata.model.Person;
 import com.henry.displaydata.model.PersonDetail;
-import com.henry.displaydata.service.RestServiceInterface;
-import com.squareup.okhttp.OkHttpClient;
+
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+
 
 /**
  * Created by Henry.Oforeh on 2016/07/22.

@@ -1,27 +1,22 @@
 package com.henry.displaydata.background;
 
 import android.content.Context;
-import android.database.CursorJoiner;
+
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.henry.displaydata.app.AppConfig;
+
 import com.henry.displaydata.controller.PersonController;
 import com.henry.displaydata.listener.OnDownloadTaskCompleted;
 import com.henry.displaydata.model.Person;
 import com.henry.displaydata.model.PersonDetail;
-import com.henry.displaydata.service.RestServiceInterface;
-import com.squareup.okhttp.OkHttpClient;
+import com.henry.displaydata.service.RestClient;
+
 
 import java.util.ArrayList;
-
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+
 
 /**
  * Created by Henry.Oforeh on 2016/07/23.
@@ -56,22 +51,7 @@ public class DownloadPersonTask extends AsyncTask<Object, Void, ArrayList<Person
 
     public ArrayList<Person> DownloadPersons()
     {
-        try {
-             Gson gson = new GsonBuilder()
-                    .create();
-
-             RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(AppConfig.REST_SERVICE_URL)
-                    .setConverter(new GsonConverter(gson))
-                    .setClient(new OkClient(new OkHttpClient()))
-                    .build();
-
-             RestServiceInterface personListService = restAdapter.create(RestServiceInterface.class);
-             return personListService.GetPersons();
-        } catch (Exception e) {
-            Toast.makeText(context, "oops! download error " + e.getMessage(), Toast.LENGTH_LONG).show();
-            return null;
-        }
+       return RestClient.getRestClient().GetPersons();
     }
 
     public void ParsePersonDetail(ArrayList<Person> personList)
@@ -84,17 +64,7 @@ public class DownloadPersonTask extends AsyncTask<Object, Void, ArrayList<Person
 
     private void DownloadPersonDetail(final int personId)
     {
-        Gson gson = new GsonBuilder()
-                .create();
-
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(AppConfig.REST_SERVICE_URL)
-                .setConverter(new GsonConverter(gson))
-                .setClient(new OkClient(new OkHttpClient()))
-                .build();
-        RestServiceInterface msgs = restAdapter.create(RestServiceInterface.class);
-
-        msgs.GetPersonDetail(personId,new Callback<PersonDetail>()
+        RestClient.getRestClient().GetPersonDetail(personId,new Callback<PersonDetail>()
         {
             @Override
             public void success(PersonDetail tempPersonDetail, retrofit.client.Response response)

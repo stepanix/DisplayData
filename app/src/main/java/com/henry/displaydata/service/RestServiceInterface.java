@@ -20,6 +20,7 @@ public interface RestServiceInterface
     @GET("/person")
     ArrayList<Person> GetPersons();
 
+
     @GET("/person/{id}")
     public void GetPersonDetail(@Path("id") int id, Callback<PersonDetail> callback);
 }
