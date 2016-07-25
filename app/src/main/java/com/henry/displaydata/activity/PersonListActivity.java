@@ -93,6 +93,11 @@ public class PersonListActivity extends AppCompatActivity implements OnDownloadT
         }
     }
 
+    //For unit Test
+    public PersonDataAdapter getPersonAdapter(){
+        return adapter;
+    }
+
     private void setExecutionTask()
     {
         final Handler handler = new Handler();
