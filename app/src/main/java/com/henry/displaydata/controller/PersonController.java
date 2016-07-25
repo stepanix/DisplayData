@@ -57,13 +57,13 @@ public class PersonController extends Application
                       "'" + personDetail.getFavouriteColour() + "');";
               dbHelper.SaveRecord(sqlQuery);
           }catch(SQLiteConstraintException ex){
-
           }
       }
 
       public void AddPersons(ArrayList<Person> personList,OnDownloadTaskCompleted listener)
       {
-          try{
+          try
+          {
               String sqlQuery = "";
               DbHelper dbHelper = new DbHelper(context);
               for(Person person: personList)
